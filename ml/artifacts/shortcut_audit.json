@@ -1,0 +1,372 @@
+{
+  "noise_floor": 0.00394,
+  "noise_floors": [
+    0.00394,
+    0.01457,
+    0.01489
+  ],
+  "passes": 3,
+  "model_all_columns": {
+    "pr_auc": 0.9401,
+    "recall_at_1pct_fpr": 0.9841
+  },
+  "model_without_flagged": {
+    "pr_auc": 0.5348,
+    "recall_at_1pct_fpr": 0.75
+  },
+  "clean_model": {
+    "pr_auc": 0.4854,
+    "recall_at_1pct_fpr": 0.6905
+  },
+  "flagged": [
+    "device_is_emulator",
+    "id_format_v2",
+    "app_version_old",
+    "ts_minute_59",
+    "merchant_code",
+    "os_build_suffix",
+    "session_seconds",
+    "email_domain_rank",
+    "browser_lang",
+    "screen_res_code",
+    "geo_bucket"
+  ],
+  "decoys_flagged": [],
+  "features": [
+    {
+      "name": "log_amount",
+      "kind": "approved",
+      "perm_drop": 0.35288,
+      "perm_std": 0.02328,
+      "mask_drop": 0.20947,
+      "relied_on": true,
+      "flagged": false,
+      "pass": null
+    },
+    {
+      "name": "type_code",
+      "kind": "approved",
+      "perm_drop": 0.34826,
+      "perm_std": 0.00405,
+      "mask_drop": 0.17725,
+      "relied_on": true,
+      "flagged": false,
+      "pass": null
+    },
+    {
+      "name": "payee_inbound_senders_24h",
+      "kind": "approved",
+      "perm_drop": 0.29257,
+      "perm_std": 0.00594,
+      "mask_drop": 0.2046,
+      "relied_on": true,
+      "flagged": false,
+      "pass": null
+    },
+    {
+      "name": "sender_txns_1h",
+      "kind": "approved",
+      "perm_drop": 0.16865,
+      "perm_std": 0.00895,
+      "mask_drop": 0.12911,
+      "relied_on": true,
+      "flagged": false,
+      "pass": null
+    },
+    {
+      "name": "device_is_emulator",
+      "kind": "planted",
+      "perm_drop": 0.12344,
+      "perm_std": 0.01451,
+      "mask_drop": 0.06548,
+      "relied_on": true,
+      "flagged": true,
+      "pass": 1,
+      "retrain_ap_drop": 0.0543,
+      "retrain_recall_drop": -0.004,
+      "strength": "strong",
+      "description": "emulator flag set by fraud tooling"
+    },
+    {
+      "name": "session_seconds",
+      "kind": "planted",
+      "perm_drop": 0.10176,
+      "perm_std": 0.01667,
+      "mask_drop": 0.07692,
+      "relied_on": true,
+      "flagged": true,
+      "pass": 1,
+      "retrain_ap_drop": 0.0508,
+      "retrain_recall_drop": 0.0159,
+      "strength": "medium",
+      "description": "shorter sessions in the fraud capture"
+    },
+    {
+      "name": "is_new_payee",
+      "kind": "approved",
+      "perm_drop": 0.09748,
+      "perm_std": 0.00208,
+      "mask_drop": 0.0685,
+      "relied_on": true,
+      "flagged": false,
+      "pass": null
+    },
+    {
+      "name": "balance_drain_ratio",
+      "kind": "approved",
+      "perm_drop": 0.09657,
+      "perm_std": 0.00139,
+      "mask_drop": 0.09605,
+      "relied_on": true,
+      "flagged": false,
+      "pass": null
+    },
+    {
+      "name": "amount_vs_sender_mean",
+      "kind": "approved",
+      "perm_drop": 0.07232,
+      "perm_std": 0.00726,
+      "mask_drop": 0.04789,
+      "relied_on": true,
+      "flagged": false,
+      "pass": null
+    },
+    {
+      "name": "sender_txn_count",
+      "kind": "approved",
+      "perm_drop": 0.05432,
+      "perm_std": 0.01133,
+      "mask_drop": 0.01827,
+      "relied_on": true,
+      "flagged": false,
+      "pass": null
+    },
+    {
+      "name": "hour_of_day",
+      "kind": "approved",
+      "perm_drop": 0.05386,
+      "perm_std": 0.01523,
+      "mask_drop": 0.01634,
+      "relied_on": true,
+      "flagged": false,
+      "pass": null
+    },
+    {
+      "name": "email_domain_rank",
+      "kind": "planted",
+      "perm_drop": 0.05134,
+      "perm_std": 0.00797,
+      "mask_drop": 0.01216,
+      "relied_on": true,
+      "flagged": true,
+      "pass": 1,
+      "retrain_ap_drop": 0.002,
+      "retrain_recall_drop": -0.0119,
+      "strength": "weak",
+      "description": "email-domain popularity rank"
+    },
+    {
+      "name": "browser_lang",
+      "kind": "planted",
+      "perm_drop": 0.04141,
+      "perm_std": 0.00227,
+      "mask_drop": 0.03465,
+      "relied_on": true,
+      "flagged": true,
+      "pass": 2,
+      "retrain_ap_drop": 0.0232,
+      "retrain_recall_drop": 0.004,
+      "strength": "medium",
+      "description": "browser language code"
+    },
+    {
+      "name": "geo_bucket",
+      "kind": "planted",
+      "perm_drop": 0.03088,
+      "perm_std": 0.01058,
+      "mask_drop": -0.00871,
+      "relied_on": true,
+      "flagged": true,
+      "pass": 2,
+      "retrain_ap_drop": -0.0008,
+      "retrain_recall_drop": -0.0119,
+      "strength": "weak",
+      "description": "coarse geo bucket"
+    },
+    {
+      "name": "screen_res_code",
+      "kind": "planted",
+      "perm_drop": 0.02449,
+      "perm_std": 0.00496,
+      "mask_drop": 0.0188,
+      "relied_on": true,
+      "flagged": true,
+      "pass": 2,
+      "retrain_ap_drop": 0.024,
+      "retrain_recall_drop": 0.004,
+      "strength": "medium",
+      "description": "screen resolution bucket"
+    },
+    {
+      "name": "id_format_v2",
+      "kind": "planted",
+      "perm_drop": 0.02387,
+      "perm_std": 0.00637,
+      "mask_drop": 0.00444,
+      "relied_on": true,
+      "flagged": true,
+      "pass": 1,
+      "retrain_ap_drop": -0.0032,
+      "retrain_recall_drop": -0.0079,
+      "strength": "strong",
+      "description": "new account-ID format issued after a migration"
+    },
+    {
+      "name": "merchant_code",
+      "kind": "planted",
+      "perm_drop": 0.02093,
+      "perm_std": 0.00212,
+      "mask_drop": 0.01258,
+      "relied_on": true,
+      "flagged": true,
+      "pass": 1,
+      "retrain_ap_drop": 0.0346,
+      "retrain_recall_drop": 0.004,
+      "strength": "medium",
+      "description": "one merchant category code"
+    },
+    {
+      "name": "ts_minute_59",
+      "kind": "planted",
+      "perm_drop": 0.0182,
+      "perm_std": 0.00134,
+      "mask_drop": 0.01427,
+      "relied_on": true,
+      "flagged": true,
+      "pass": 1,
+      "retrain_ap_drop": 0.0462,
+      "retrain_recall_drop": 0.004,
+      "strength": "medium",
+      "description": "batch job stamps fraud at :59 (timestamp leak)"
+    },
+    {
+      "name": "app_version_old",
+      "kind": "planted",
+      "perm_drop": 0.0178,
+      "perm_std": 0.0028,
+      "mask_drop": 0.0114,
+      "relied_on": true,
+      "flagged": true,
+      "pass": 1,
+      "retrain_ap_drop": 0.0113,
+      "retrain_recall_drop": -0.0119,
+      "strength": "strong",
+      "description": "outdated app build"
+    },
+    {
+      "name": "drains_account",
+      "kind": "approved",
+      "perm_drop": 0.0091,
+      "perm_std": 0.00154,
+      "mask_drop": 0.00688,
+      "relied_on": false,
+      "flagged": false,
+      "pass": null
+    },
+    {
+      "name": "ip_octet_parity",
+      "kind": "planted",
+      "perm_drop": 0.00672,
+      "perm_std": 0.0014,
+      "mask_drop": 0.00445,
+      "relied_on": false,
+      "flagged": false,
+      "pass": null,
+      "strength": "weak",
+      "description": "odd last IP octet"
+    },
+    {
+      "name": "os_build_suffix",
+      "kind": "planted",
+      "perm_drop": 0.00465,
+      "perm_std": 0.0009,
+      "mask_drop": 0.00366,
+      "relied_on": true,
+      "flagged": true,
+      "pass": 1,
+      "retrain_ap_drop": 0.0355,
+      "retrain_recall_drop": -0.004,
+      "strength": "medium",
+      "description": "OS build suffix"
+    },
+    {
+      "name": "payee_first_seen",
+      "kind": "approved",
+      "perm_drop": 0.00175,
+      "perm_std": 4e-05,
+      "mask_drop": 0.00181,
+      "relied_on": false,
+      "flagged": false,
+      "pass": null
+    },
+    {
+      "name": "_decoy_normal",
+      "kind": "decoy",
+      "perm_drop": 0.00036,
+      "perm_std": 0.00484,
+      "mask_drop": -0.00583,
+      "relied_on": false,
+      "flagged": false,
+      "pass": null
+    },
+    {
+      "name": "_decoy_binary",
+      "kind": "decoy",
+      "perm_drop": -0.00048,
+      "perm_std": 0.00024,
+      "mask_drop": -0.00017,
+      "relied_on": false,
+      "flagged": false,
+      "pass": null
+    },
+    {
+      "name": "_decoy_uniform",
+      "kind": "decoy",
+      "perm_drop": -0.00138,
+      "perm_std": 0.00261,
+      "mask_drop": -0.00583,
+      "relied_on": false,
+      "flagged": false,
+      "pass": null
+    },
+    {
+      "name": "is_odd_hour",
+      "kind": "approved",
+      "perm_drop": -0.00204,
+      "perm_std": 0.00074,
+      "mask_drop": -0.00226,
+      "relied_on": false,
+      "flagged": false,
+      "pass": null
+    },
+    {
+      "name": "_decoy_category",
+      "kind": "decoy",
+      "perm_drop": -0.00256,
+      "perm_std": 0.00281,
+      "mask_drop": -0.00405,
+      "relied_on": false,
+      "flagged": false,
+      "pass": null
+    }
+  ],
+  "mode": "planted",
+  "planted": 12,
+  "recovered": 11,
+  "recovery_rate": 0.9167,
+  "missed": [
+    "ip_octet_parity"
+  ],
+  "false_alarms": [],
+  "ran_at": "2026-10-18T16:00:08.394415+00:00"
+}

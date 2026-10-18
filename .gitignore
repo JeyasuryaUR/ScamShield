@@ -1,0 +1,22 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+
+# Data: download or generate locally (see README)
+ml/data/
+
+# Secrets
+.env
+.env.local
+
+# Node
+node_modules/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.idea/

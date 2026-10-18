@@ -1,0 +1,7 @@
+# Everything for the scorer, the ML pipeline and the tools. From the repo root:
+#   python -m venv .venv && .venv/Scripts/activate   (Windows)  |  source .venv/bin/activate
+#   pip install -r requirements.txt
+-e ./services/scorer[dev]
+pandas>=2.2
+scikit-learn>=1.5
+pyarrow>=16

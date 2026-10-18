@@ -1,0 +1,21 @@
+{
+  "label": "laptop-windows",
+  "url": "http://127.0.0.1:8000",
+  "at": "2026-10-18T04:45:13.440666+00:00",
+  "machine": "Windows AMD64",
+  "model_version": "lgbm-20261018-2befd25c",
+  "requests": 10000,
+  "errors": 0,
+  "mode": "open loop at 200.0 tx/s",
+  "throughput_tps": 200.0,
+  "client_ms": {
+    "p50": 11.145,
+    "p95": 33.324,
+    "p99": 41.893
+  },
+  "server_scoring_ms": {
+    "p50": 1.481,
+    "p95": 2.668,
+    "p99": 2.978
+  }
+}

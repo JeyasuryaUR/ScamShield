@@ -1,0 +1,52 @@
+{
+  "model_version": "lgbm-20261018-2befd25c",
+  "trained_at": "2026-10-18T15:52:10.553868+00:00",
+  "dataset": "synthetic_paysim.csv",
+  "test_rows": 202933,
+  "test_fraud": 252,
+  "pr_auc": 0.4854,
+  "roc_auc": 0.9576,
+  "recall_at_1pct_fpr": 0.6905,
+  "recall_at_0_1pct_fpr": 0.5079,
+  "verify_threshold": 0.00464,
+  "hold_threshold": 0.086293,
+  "actions": {
+    "fraud": {
+      "allow": 78,
+      "verify": 46,
+      "hold": 128
+    },
+    "legit": {
+      "allow": 200673,
+      "verify": 1827,
+      "hold": 181
+    }
+  },
+  "fraud_amount_intercepted_pct": 0.9223,
+  "reason_codes_on_flagged_fraud": {
+    "RISKY_TYPE": 141,
+    "NEW_PAYEE": 63,
+    "AMOUNT_SPIKE": 54,
+    "BALANCE_DRAIN": 49,
+    "MULE_PATTERN": 47,
+    "ODD_HOUR": 44,
+    "HIGH_AMOUNT": 33,
+    "UNKNOWN_PAYEE": 6,
+    "HIGH_VELOCITY": 4,
+    "THIN_HISTORY": 1
+  },
+  "feature_importance_gain": {
+    "payee_inbound_senders_24h": 263677.7,
+    "log_amount": 217150.1,
+    "amount_vs_sender_mean": 140583.5,
+    "sender_txns_1h": 112352.3,
+    "hour_of_day": 73005.1,
+    "sender_txn_count": 58640.7,
+    "balance_drain_ratio": 52341.4,
+    "type_code": 34377.6,
+    "is_new_payee": 11284.4,
+    "payee_first_seen": 2311.0,
+    "drains_account": 1767.8,
+    "is_odd_hour": 1054.2
+  }
+}

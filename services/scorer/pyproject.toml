@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scamshield-scorer"
+version = "1.0.0"
+description = "Real-time payment scoring service for Scam Shield"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29",
+    "lightgbm>=4.3",
+    "numpy>=1.26",
+    "pyyaml>=6.0",
+    "httpx>=0.27",
+    "prometheus-client>=0.20",
+    "pydantic>=2.6",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.4"]
+
+[tool.setuptools.packages.find]
+include = ["scorer*"]
+
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

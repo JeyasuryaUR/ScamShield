@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+/* Scam Shield palette, taken from the pitch deck */
+@theme {
+  --color-forest: #1f3a35;
+  --color-forest-2: #2b4a44;
+  --color-cream: #f3efe8;
+  --color-paper: #fbf9f5;
+  --color-sand: #e3ddd3;
+  --color-clay: #cf6c43;
+  --color-clay-soft: #f6e1d7;
+  --color-moss: #3f7a5c;
+  --color-moss-soft: #dcebe1;
+  --color-amber: #b7862b;
+  --color-amber-soft: #f4e8cc;
+  --color-muted: #5f6f6b;
+
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-tamil: var(--font-noto-tamil), var(--font-dm-sans), sans-serif;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-forest);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-clay);
+  outline-offset: 2px;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}

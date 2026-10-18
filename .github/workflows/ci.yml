@@ -1,0 +1,86 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  scorer:
+    name: Scorer · lint + tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12", cache: pip }
+      - run: pip install -r requirements.txt
+      - run: ruff check . && ruff format --check .
+      - run: pytest -q
+        working-directory: services/scorer
+
+  ml-smoke:
+    name: ML pipeline · smoke run on small synthetic data
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12", cache: pip }
+      - run: pip install -r requirements.txt
+      - run: |
+          python ml/src/make_synthetic.py --customers 4000 --days 21
+          python ml/src/prep_paysim.py --source synthetic
+          python ml/src/train.py
+          python ml/src/evaluate.py
+          python ml/src/plant_shortcuts.py
+          python ml/src/shortcut_audit.py
+
+  web:
+    name: Web · lint + typecheck + build
+    runs-on: ubuntu-latest
+    defaults:
+      run: { working-directory: apps/web }
+    env:
+      NEXT_PUBLIC_SUPABASE_URL: http://127.0.0.1:54321
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ci-placeholder
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: apps/web/package-lock.json }
+      - run: npm ci
+      - run: npx eslint .
+      - run: npx next typegen && npx tsc --noEmit
+      - run: npx next build
+
+  database:
+    name: Database · migrations + RLS tests (PGlite)
+    runs-on: ubuntu-latest
+    defaults:
+      run: { working-directory: supabase/tests }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: npm ci && npm test
+
+  image:
+    name: Scorer image · amd64 + s390x (LinuxONE)
+    if: github.event_name != 'pull_request'
+    needs: [scorer]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: services/scorer/Dockerfile
+          platforms: linux/amd64,linux/s390x
+          push: false
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
